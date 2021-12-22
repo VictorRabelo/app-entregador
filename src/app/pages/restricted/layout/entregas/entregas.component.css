@@ -1,0 +1,12 @@
+@media (max-width: 580px){
+
+    .col-9 h1.m-0 {
+        font-size: 19pt;
+    }
+
+    .card-header>.card-tools .input-group, .card-header>.card-tools .nav, 
+    .card-header>.card-tools .pagination {
+        margin-bottom: 0 !important;
+        margin-top: -0.3rem !important;
+    }
+}
