@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EstoqueService } from '@app/services/estoque.service';
+import { EntregaService } from '@app/services/entrega.service';
 import { MessageService } from '@app/services/message.service';
-import { ProdutoService } from '@app/services/produto.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalProductDadosComponent } from '../modal-product-dados/modal-product-dados.component';
 
@@ -25,7 +24,7 @@ export class ModalProductsComponent implements OnInit {
   constructor(
     private modalCtrl: NgbModal,
     private activeModal: NgbActiveModal,
-    private service: EstoqueService,
+    private service: EntregaService,
     private message: MessageService,
   ) { }
 

@@ -1,15 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CrudService } from '@app/services/crud.service';
+import { ClienteService } from '@app/services/cliente.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 
 @Component({
   selector: 'app-modal-pessoal',
   templateUrl: './modal-pessoal.component.html',
-  styleUrls: ['./modal-pessoal.component.css'],
-  providers: [
-    CrudService
-  ]
+  styleUrls: ['./modal-pessoal.component.css']
 })
 export class ModalPessoalComponent implements OnInit {
 
@@ -25,14 +22,11 @@ export class ModalPessoalComponent implements OnInit {
   constructor(
     private modalCtrl: NgbModal,
     private activeModal: NgbActiveModal,
-    private service: CrudService
+    private service: ClienteService
   ) { }
 
   ngOnInit(): void {
-    if (this.type) {
-      this.service.setEndPoint(this.type);    
-      this.listing();
-    }
+    this.listing();
   }
 
   close(params = undefined) {

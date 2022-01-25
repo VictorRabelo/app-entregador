@@ -9,8 +9,8 @@ import { select, Store } from '@ngrx/store';
 import { currentUser } from '@app/core/selectors/auth.selector';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalAlterPasswordComponent } from '@app/components/modal-alter-password/modal-alter-password.component';
 import { enterAnimationIcon } from '@app/animations';
+import { BaseService } from '@app/services/base.service';
 
 declare let $: any;
 
@@ -27,6 +27,8 @@ export class NavTopComponent extends ControllerBase {
   screenWidth: any;
   
   navDarkMode: boolean;
+  navApiCdi: boolean;
+
   body = document.getElementsByTagName('body')[0];
 
   user: any = {};
@@ -59,6 +61,21 @@ export class NavTopComponent extends ControllerBase {
       this.body.classList.add("dark-mode");
       this.navDarkMode = true;
     }
+    
+    const api = localStorage.getItem(environment.api);
+    
+    if(!api) {
+      localStorage.setItem(environment.api, 'ltgo');
+      this.navApiCdi = false;
+    }
+
+    if(api == 'ltgo') {
+      this.navApiCdi = false;
+    }
+
+    if(api == 'cdi') {
+      this.navApiCdi = true;
+    }
 
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
@@ -73,15 +90,6 @@ export class NavTopComponent extends ControllerBase {
   onResize(event?) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-  }
-
-  alterPassword(){
-    const modalRef = this.modalCtrl.open(ModalAlterPasswordComponent, { size: 'sm', backdrop: 'static' });
-    modalRef.result.then(res => {
-      if(res){
-        this.message.toastSuccess('Senha atualizada com sucesso!');
-      }
-    })
   }
 
   logout() {
@@ -137,5 +145,23 @@ export class NavTopComponent extends ControllerBase {
     },error => {
       console.log(error)
     });
+  }
+
+  atualizaApi(){
+    if (!this.user) {
+      return;
+    }
+
+    if(this.navApiCdi) {
+      localStorage.setItem(environment.api, 'ltgo');
+      this.navApiCdi = false;
+    } else {
+      localStorage.setItem(environment.api, 'cdi');
+      this.navApiCdi = true;
+    }
+    
+    document.location.reload();
+    
+    return;
   }
 }

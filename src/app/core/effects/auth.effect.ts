@@ -20,6 +20,7 @@ export class AuthEffects {
     ofType<Login>(AuthActionTypes.Login),
     tap(action => {
       localStorage.setItem(environment.authTokenKey, action.payload.token);
+      localStorage.setItem(environment.authTokenKeyCdi, action.payload.tokenApi);
       this.store.dispatch(new UserRequested());
     }),
   );
@@ -28,8 +29,7 @@ export class AuthEffects {
   logout$ = this.actions$.pipe(
     ofType<Logout>(AuthActionTypes.Logout),
     tap(() => {
-      localStorage.removeItem(environment.authTokenKey);
-      localStorage.removeItem(environment.tema);
+      this.removeStorage();
       this.router.navigate(['/signin'], { queryParams: { returnUrl: this.returnUrl } });
     })
   );
@@ -55,7 +55,8 @@ export class AuthEffects {
     const userToken = localStorage.getItem(environment.authTokenKey);
     let observableResult = of({ type: 'NO_ACTION' });
     if (userToken) {
-      observableResult = of(new Login({ token: userToken }));
+      const tokenApi = localStorage.getItem(environment.authTokenKeyCdi);
+      observableResult = of(new Login({ token: userToken, tokenApi: tokenApi }));
     }
     return observableResult;
   });
@@ -72,5 +73,12 @@ export class AuthEffects {
         this.returnUrl = event.url;
       }
     });
+  }
+
+  removeStorage(): void {
+    localStorage.removeItem(environment.authTokenKey);
+    localStorage.removeItem(environment.authTokenKeyCdi);
+    localStorage.removeItem(environment.tema);
+    localStorage.removeItem(environment.api);
   }
 }

@@ -10,7 +10,13 @@
             </div>
         </div>
     </div>
-
+    <ion-content class="floating-button-action">
+        <ion-fab vertical="top" horizontal="start" slot="fixed">
+            <ion-fab-button (click)="openForm('cadastrar')" style="width:40px; height: 40px;">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+    </ion-content>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -19,9 +25,7 @@
                     <div class="card" [ngClass]="{'card-load': loading}">
                         <div class="card-header">
                             <div class="card-title">
-                                <button type="button" class="btn btn-primary mr-2" (click)="openForm('cadastrar')">
-                                    <i class="fas fa-plus"></i> Novo Cliente
-                                </button>
+                                
                             </div>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm inputSearch">
@@ -39,7 +43,7 @@
                         <div class="card-body table-responsive p-0" style="height: 100%;">
                             <table class="table table-hover text-nowrap">
                                 <thead>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th scope="col">#ID</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">Telefone</th>
@@ -47,16 +51,13 @@
                                     </tr>
                                 </thead>
                                 <tbody *ngFor="let cliente of dados | filter:term">
-                                    <tr>
+                                    <tr class="text-center">
                                         <th scope="row">#{{ cliente.id_cliente }}</th>
                                         <td>{{ cliente.name }}</td>
                                         <td>{{ cliente.telefone | mask: '(00) 00000-0000' }}</td>
                                         <td>
                                             <button class="btn btn-warning btn-sm mr-3" title="Editar" (click)="openForm('alterar', cliente.id_cliente)">
                                                 <i class="nav-icon fas fa-edit"></i>
-                                            </button>
-                                            <button class="btn btn-danger btn-sm" title="Excluir" (click)="delete(cliente.id_cliente)">
-                                                <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>

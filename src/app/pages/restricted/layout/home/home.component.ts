@@ -11,7 +11,7 @@ import { SubSink } from 'subsink';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent extends ControllerBase {
 
@@ -56,6 +56,7 @@ export class HomeComponent extends ControllerBase {
     private dashboardService: DashboardService
   ) { 
     super();
+    dashboardService.setUrl(this.getUrlCurrent());
   }
 
   ngOnInit() {
@@ -67,13 +68,7 @@ export class HomeComponent extends ControllerBase {
     this.getVendasDia();
     this.getVendasMes();
     this.getVendasTotal();
-    this.getTotalClientes();
-    this.getProdutosEnviados();
-    this.getProdutosPagos();
     this.getProdutosEstoque();
-    this.getProdutosVendidos();
-    this.getProdutosCadastrados();
-    this.getContasReceber();
   }
 
   getVendasDia(){
@@ -115,58 +110,6 @@ export class HomeComponent extends ControllerBase {
     });
   }
   
-  getTotalClientes(){
-    this.loadingTotalClientes = true;
-
-    this.sub.sink = this.dashboardService.getTotalClientes().subscribe((res: any) => {
-      this.loadingTotalClientes = false;
-      this.clientes = res;
-    },
-    error => {
-      console.log(error)
-      this.loadingTotalClientes = false;
-    });
-  }
-  
-  getProdutosEnviados(){
-    this.loadingProdutosEnviados = true;
-
-    this.sub.sink = this.dashboardService.getProdutosEnviados().subscribe((res: any) => {
-      this.loadingProdutosEnviados = false;
-      this.enviados = res;
-    },
-    error => {
-      console.log(error)
-      this.loadingProdutosEnviados = false;
-    });
-  }
- 
-  getProdutosCadastrados(){
-    this.loadingProdutosCadastrados = true;
-
-    this.sub.sink = this.dashboardService.getProdutosCadastrados().subscribe((res: any) => {
-      this.loadingProdutosCadastrados = false;
-      this.produtosCadastrados = res;
-    },
-    error => {
-      console.log(error)
-      this.loadingProdutosEnviados = false;
-    });
-  }
-  
-  getProdutosPagos(){
-    this.loadingProdutosPagos = true;
-
-    this.sub.sink = this.dashboardService.getProdutosPagos().subscribe((res: any) => {
-      this.loadingProdutosPagos = false;
-      this.pagos = res;
-    },
-    error => {
-      console.log(error)
-      this.loadingProdutosPagos = false;
-    });
-  }
-  
   getProdutosEstoque(){
     this.loadingProdutosEstoque = true;
 
@@ -177,32 +120,6 @@ export class HomeComponent extends ControllerBase {
     error => {
       console.log(error)
       this.loadingProdutosEstoque = false;
-    });
-  }
-  
-  getProdutosVendidos(){
-    this.loadingProdutosVendidos = true;
-
-    this.sub.sink = this.dashboardService.getProdutosVendidos().subscribe((res: any) => {
-      this.loadingProdutosVendidos = false;
-      this.vendidos = res;
-    },
-    error => {
-      console.log(error)
-      this.loadingProdutosVendidos = false;
-    });
-  }
-  
-  getContasReceber(){
-    this.loadingContasReceber = true;
-
-    this.sub.sink = this.dashboardService.getContasReceber().subscribe((res: any) => {
-      this.loadingContasReceber = false;
-      this.contasReceber = res;
-    },
-    error => {
-      console.log(error)
-      this.loadingContasReceber = false;
     });
   }
 

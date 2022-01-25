@@ -2,6 +2,10 @@
     width: 160px;
 }
 
+.colorMoney {
+    color: green !important;
+}
+
 @media (max-width: 580px){
     .inputVenda {
         width: 42px !important;
@@ -11,6 +15,10 @@
         font-size: 19pt;
     }
 
+    span.colorMoney {
+        color: green !important;
+    }
+    
     .card-header>.card-tools .input-group, .card-header>.card-tools .nav, 
     .card-header>.card-tools .pagination {
         margin-bottom: 0 !important;

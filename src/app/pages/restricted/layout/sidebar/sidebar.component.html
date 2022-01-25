@@ -2,15 +2,15 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a [routerLink]="['/restricted/home']" class="brand-link">
-    <img src="/assets/img/logoo.png" alt="Little Trees Go" class="brand-image img-circle elevation-2">
-    <span class="brand-text font-weight-light">Little Trees Go</span>
+    <img src="/assets/img/logo.jpg" alt="CDI/LTGO" class="brand-image img-circle elevation-2">
+    <span class="brand-text font-weight-light">CDI/LTGO</span>
   </a>
 
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" (click)="closeSide()">
         <li class="nav-header">Menu</li>
         <li class="nav-item">
           <a [routerLink]="['/restricted/home']" routerLinkActive="link-active" class="nav-link">
@@ -41,6 +41,14 @@
             <i class="nav-icon fas fa-users"></i>
             <p>
               Clientes
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="alterPassword()">
+            <i class="fas fa-lock"></i>
+            <p>
+              Alterar Senha
             </p>
           </a>
         </li>

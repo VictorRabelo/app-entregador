@@ -15,6 +15,7 @@ registerLocaleData(localePtBR);
 // App
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ComponentsModule } from './components/components.module';
 import { LayoutModule } from '@app/pages/restricted/layout/layout.module';
 import { UtilModule } from './util/util.module';
 import { SigninComponent } from './pages/auth/signin/signin.component';
@@ -38,15 +39,21 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 // Ng2
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { NgbButtonsModule, NgbDropdownModule, NgbModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { ComponentsModule } from './components/components.module';
-import { MatStepperModule, MatTabsModule } from '@angular/material';
 
+// Ng Bootstrap
+import { NgbButtonsModule, NgbDropdownModule, NgbModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+
+// Material Angular
+import { MatStepperModule, MatTabsModule, MatButtonModule, MatIconModule } from '@angular/material';
+
+// State of application - Store
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './core/reducers';
 import { authReducer } from './core/reducers/auth.reducers';
 import { AuthEffects } from './core/effects/auth.effect';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -71,17 +78,22 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     UtilModule,
     LayoutModule,
     
-    NgxIziToastModule,
     ToastModule,
     RippleModule,
     FileUploadModule,
+    
     ProgressSpinnerModule,
+    
     Ng2SearchPipeModule,
+    
+    NgxIziToastModule,
     NgxSpinnerModule,
     
     MatTabsModule,
     MatStepperModule,
-    
+    MatButtonModule,
+    MatIconModule,
+
     NgbModule,
     NgbDropdownModule,
     NgbTooltipModule,
@@ -100,6 +112,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forRoot([AuthEffects]),
     IonicModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

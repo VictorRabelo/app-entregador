@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ControllerBase } from '@app/controller/controller.base';
 import { MessageService } from '@app/services/message.service';
 import { VendaService } from '@app/services/venda.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,7 +11,7 @@ import { SubSink } from 'subsink';
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.css']
 })
-export class SalesComponent implements OnInit, OnDestroy {
+export class SalesComponent extends ControllerBase {
   private sub = new SubSink();
   public today: number = Date.now();
 
@@ -18,7 +19,7 @@ export class SalesComponent implements OnInit, OnDestroy {
 
   loading: boolean = false;
 
-  filters: any = { date: '' };
+  filters: any = { date: '', app: true, typeApi: '' };
 
   totalVendas: number = 0;
   totalMensal: number = 0;
@@ -32,7 +33,10 @@ export class SalesComponent implements OnInit, OnDestroy {
     private service: VendaService,
     private message: MessageService,
     private spinner: NgxSpinnerService,
-  ) { }
+  ) { 
+    super();
+    service.setUrl(this.getUrlCurrent());
+  }
 
   ngOnInit(): void {
     this.getStart();
@@ -68,20 +72,34 @@ export class SalesComponent implements OnInit, OnDestroy {
     this.message.swal.fire({
       title: 'Iniciar nova venda?',
       icon: 'question',
+      inputLabel: 'Selecione a empresa',
+      input: 'radio',
+      inputOptions: {
+        'cdi': 'CDIGO',
+        'ltgo': 'LTGO',
+      },
+      inputValidator: (value) => {
+        if (!value) {
+          return 'É necessário selecionar uma empresa.'
+        }
+      },
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Voltar',
       showCancelButton: true
     }).then(res => {
+      
+      this.filters.typeApi = res.value;
+      
       if (res.isConfirmed) {
-        this.createVenda();
+        this.createVenda(this.filters);
       }
     })
   }
 
-  createVenda() {
+  createVenda(params) {
     this.loading = true;
-    this.service.store({}).subscribe(res => {
-      this.router.navigate([`/restricted/vendas/${res.id_venda}`]);
+    this.service.store(params).subscribe(res => {
+      this.router.navigate([`/restricted/vendas/${res.id_venda}`],{ queryParams: { typeApi: res.typeApi } });
     }, error =>{
       this.loading = false;
       this.message.toastError(error.message)

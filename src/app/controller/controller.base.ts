@@ -8,6 +8,7 @@ declare let $: any;
 import 'bootstrap';
 import { select, Store } from '@ngrx/store';
 import { currentUser } from '@app/core/selectors/auth.selector';
+import { environment } from '@env/environment';
 
 @Injectable({providedIn: "root"})
 export class ControllerBase implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
@@ -38,6 +39,20 @@ export class ControllerBase implements OnInit, AfterContentInit, AfterViewInit, 
     ngOnDestroy() {
     }
 
+    getUrlCurrent(): string {
+        let api: string = localStorage.getItem(environment.api);
+    
+        if(api == 'ltgo') {
+            api = environment.apiUrlLtgo;
+        }
+      
+        if(api == 'cdi') {
+            api = environment.apiUrlCdi;
+        }
+        
+        return api;
+    }
+    
     isAdmin() {
         return this.currentUser && this.currentUser.role === Role.admin;  
     }

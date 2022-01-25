@@ -36,6 +36,8 @@ import { NgxIziToastModule } from 'ngx-izitoast';
 import { DataTablesModule } from 'angular-datatables';
 import { NgbDropdownModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersComponent } from './users/users.component';
+import { MatButtonModule, MatIconModule } from '@angular/material';
+import { IonicModule } from '@ionic/angular';
  
 export const customCurrencyMaskConfig = {
     align: "left",
@@ -71,11 +73,14 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     Ng2SearchPipeModule,
     NgxIziToastModule,
     DataTablesModule,
+    MatButtonModule,
+    MatIconModule,
     NgbPaginationModule,
     NgbModule,
     NgbDropdownModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    IonicModule.forRoot(),
 
   ],
   declarations: [

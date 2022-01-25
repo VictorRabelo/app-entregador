@@ -7,48 +7,54 @@ import { BaseService } from './base.service';
 @Injectable({ providedIn: 'root' })
 export class DashboardService extends BaseService {
 
-    constructor(http: HttpClient) { 
-        super(http);
+    urlApi: string;
+
+    constructor(private http: HttpClient) {
+        super();
+    }
+
+    setUrl(url: string): void {
+        this.urlApi = url;
     }
 
     getVendasDia() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/vendas-dia`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/vendas-dia`, { params: { app: 'true' } });
     }
     
     getVendasMes() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/vendas-mes`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/vendas-mes`, { params: { app: 'true' } });
     }
     
     getVendasTotal() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/vendas-total`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/vendas-total`, { params: { app: 'true' } });
     }
     
     getTotalClientes() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/clientes-total`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/clientes-total`, { params: { app: 'true' } });
     }
     
     getProdutosEnviados() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/produtos-enviados`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/produtos-enviados`, { params: { app: 'true' } });
     }
     
     getProdutosCadastrados() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/produtos-cadastrados`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/produtos-cadastrados`, { params: { app: 'true' } });
     }
     
     getProdutosPagos() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/produtos-pagos`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/produtos-pagos`, { params: { app: 'true' } });
     }
     
     getProdutosEstoque() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/produtos-estoque`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/produtos-estoque`, { params: { app: 'true' } });
     }
     
     getProdutosVendidos() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/produtos-vendidos`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/produtos-vendidos`, { params: { app: 'true' } });
     }
     
     getContasReceber() {
-        return this.http.get<any>(`${environment.apiUrl}/dashboard/contas-receber`);
+        return this.http.get<any>(`${this.urlApi}/dashboard/contas-receber`, { params: { app: 'true' } });
     }
 
 }

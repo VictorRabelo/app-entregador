@@ -9,9 +9,18 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const api: string = localStorage.getItem(environment.api)
+    let token: string;
+
+    if(api == 'ltgo'){
+      token = localStorage.getItem(environment.authTokenKey);
+    } else {
+      token = localStorage.getItem(environment.authTokenKeyCdi);
+    }
+    
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${localStorage.getItem(environment.authTokenKey)}`
+        Authorization: `Bearer ${token}`
       }
     });
 

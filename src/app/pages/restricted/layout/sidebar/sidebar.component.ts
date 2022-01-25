@@ -1,5 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ModalAlterPasswordComponent } from '@app/components/modal-alter-password/modal-alter-password.component';
 import { ControllerBase } from '@app/controller/controller.base';
+import { MessageService } from '@app/services/message.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare let $: any;
 
@@ -11,7 +14,10 @@ declare let $: any;
 })
 export class SidebarComponent extends ControllerBase {
 
-  constructor() { 
+  constructor(
+    private modalCtrl: NgbModal,
+    private message: MessageService,
+  ) { 
     super();
   }
 
@@ -32,5 +38,26 @@ export class SidebarComponent extends ControllerBase {
       classList.remove("menu-is-opening");
       classList.remove("menu-open");
     }
+  }
+
+  closeSide(){
+    const mobile: number = window.innerWidth;
+
+    if(mobile > 400) {
+      return;
+    }
+
+    document.body.classList.remove('sidebar-open');
+    document.body.classList.add('sidebar-closed');
+    document.body.classList.add('sidebar-collapse');
+  }
+
+  alterPassword(){
+    const modalRef = this.modalCtrl.open(ModalAlterPasswordComponent, { size: 'sm', backdrop: 'static' });
+    modalRef.result.then(res => {
+      if(res){
+        this.message.toastSuccess('Senha atualizada com sucesso!');
+      }
+    })
   }
 }

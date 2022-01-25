@@ -38,20 +38,20 @@
       <div class="row">
               
         <div class="col-6">
-          <label class="text-danger">Total de vendas:</label>
-          <span>{{ totalVendas | currency: 'R$' }}</span>
+          <label class="text-danger text-totalizer">Total de vendas: </label>
+          <span class="colorMoney">{{ totalVendas | currency: 'R$' }}</span>
         </div>
         <div class="col-6">
-          <label class="text-danger">Vendas do mês:</label>
-          <span>{{ totalMensal | currency: 'R$' }}</span>
+          <label class="text-danger text-totalizer">Vendas do mês: </label>
+          <span class="colorMoney">{{ totalMensal | currency: 'R$' }}</span>
         </div>
         <div class="col-6">
-          <label class="text-danger">Recebido:</label>
-          <span>{{ recebido | currency: 'R$' }}</span>
+          <label class="text-danger text-totalizer">Recebido: </label>
+          <span class="colorMoney">{{ recebido | currency: 'R$' }}</span>
         </div>
         <div class="col-6">
-          <label class="text-danger d-block">Lucro:</label>
-          <span>{{ lucro | currency: 'R$' }}</span>
+          <label class="text-danger text-totalizer">Lucro: </label>
+          <span class="colorMoney">{{ lucro | currency: 'R$' }}</span>
         </div>
       </div>
       

@@ -1,13 +1,15 @@
-import { Component} from '@angular/core';
+import { Component, ElementRef, ViewChild} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
+import { Gesture, GestureController, GestureDetail } from '@ionic/angular';
 
-import { ControllerBase } from 'src/app/controller/controller.base';
+import { ControllerBase } from '@app/controller/controller.base';
 import { slideInLayoutAnimation } from '@app/animations';
 
-import * as $ from 'jquery';
 import { MessageService } from '@app/services/message.service';
 import { Logout } from '@app/core/actions/auth.action';
+
+import * as $ from 'jquery';
 
 
 @Component({
@@ -20,11 +22,21 @@ import { Logout } from '@app/core/actions/auth.action';
 })
 export class LayoutComponent extends ControllerBase {
 
+  @ViewChild('swipeLeft', {static: false}) swipeLeft: ElementRef;
+  
+  private gesture: Gesture;
+  swiping: boolean = false;
+  
   constructor(
     private title: Title,
     private message: MessageService,
+    private gestureCtrl: GestureController,
   ) { 
     super();
+  }
+
+  ngAfterViewInit() {
+    this.detectSwipe();
   }
 
   ngOnInit() {
@@ -50,5 +62,31 @@ export class LayoutComponent extends ControllerBase {
         this.store.dispatch(new Logout());
       }
     });
+  }
+
+  detectSwipe() {
+    this.gesture = this.gestureCtrl.create({
+      el: this.swipeLeft.nativeElement,
+      gestureName: 'swipe-left',
+      threshold: 0,
+      onMove: event => this.onMove(event),
+    }, true);
+
+    this.gesture.enable();
+  }
+  
+  onMove(event: GestureDetail) {
+    return
+    const deltaX:number = event.deltaX;
+    const startX: number = event.startX;
+    
+    const velocityX: number = event.velocityX;
+    const time: number = 1;
+
+    if(deltaX > startX && velocityX > time) {
+      document.body.classList.remove('sidebar-closed');
+      document.body.classList.remove('sidebar-collapse');
+      document.body.classList.add('sidebar-open');
+    }
   }
 }

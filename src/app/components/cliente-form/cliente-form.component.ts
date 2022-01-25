@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { CrudService } from '@app/services/crud.service';
+import { ClienteService } from '@app/services/cliente.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SubSink } from 'subsink';
 
@@ -8,9 +8,6 @@ import { SubSink } from 'subsink';
   selector: 'app-cliente-form',
   templateUrl: './cliente-form.component.html',
   styleUrls: ['./cliente-form.component.css'],
-  providers: [
-    CrudService
-  ]
 })
 export class ClienteFormComponent implements OnInit, OnDestroy {
 
@@ -20,48 +17,19 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
 
   @Input() data: any;
   @Input() crud: string;
-  @Input() module: string;
 
   dados: any = {};
-  title: string;
+  title: string = 'cliente';
 
   constructor(
     private activeModal: NgbActiveModal,
-    private service: CrudService
-  ) {}
-
-  ngOnInit() {
-    if (this.module) {
-      this.service.setEndPoint(this.module);
-      
-      if(this.module == 'clientes'){
-        this.title = 'cliente';
-        if(this.data){
-          this.getById(this.data);
-        }
+    private service: ClienteService
+    ) {}
+    
+    ngOnInit() {
+      if(this.data){
+        this.getById(this.data);
       }
-      
-      if(this.module == 'fornecedores'){
-        this.title = 'fornecedor';
-        if(this.data){
-          this.getById(this.data);
-        }
-      }
-      
-      if(this.module == 'categorias'){
-        this.title = 'categoria';
-        if(this.data){
-          this.getById(this.data);
-        }
-      }
-      
-      if(this.module == 'users'){
-        this.title = 'Usuário';
-        if(this.data){
-          this.getById(this.data);
-        }
-      }
-    }
   }
 
   close(params = undefined) {
@@ -74,25 +42,6 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
       (res: any) => {
         this.loading = false;
         this.dados = res;
-        
-        if(this.module == 'fornecedores'){
-          this.dados.name = res.fornecedor;
-          this.dados.id = res.id_fornecedor;
-        }
-        
-        if(this.module == 'clientes'){
-          this.dados.id = res.id_cliente;
-        }
-        
-        if(this.module == 'users'){
-          this.dados.role = res.role.role;
-        }
-        
-        if(this.module == 'categorias'){
-          this.dados.id = res.id_categoria;
-          this.dados.name = res.categoria;
-        }
-        
       },
       error => {
         console.log(error)
@@ -102,14 +51,6 @@ export class ClienteFormComponent implements OnInit, OnDestroy {
   submit(form: NgForm) {
     if (!form.valid) {
       return false;
-    }
-    
-    if(this.module == 'fornecedores'){
-      this.dados.fornecedor = this.dados.name;
-    }
-    
-    if(this.module == 'categorias'){
-      this.dados.categoria = this.dados.name;
     }
     
     if (this.dados.id) {

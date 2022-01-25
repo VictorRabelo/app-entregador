@@ -11,11 +11,16 @@ import { ControllerBase } from '@app/controller/controller.base';
 import { MessageService } from '@app/services/message.service';
 import { AuthService } from '@app/services/auth.service';
 import { environment } from '@env/environment';
+import { enterAnimationIcon } from '@app/animations';
+import { BaseService } from '@app/services/base.service';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
+  animations: [
+    enterAnimationIcon
+  ],
   encapsulation: ViewEncapsulation.None
 })
 export class SigninComponent extends ControllerBase {
@@ -27,8 +32,13 @@ export class SigninComponent extends ControllerBase {
   returnUrl: string;
   error = '';
   param: string;
+  
+  show: boolean = false;
+  type: string = 'password';
 
-  dados: any = {};
+  dados: any = { 
+    app: true
+  };
 
   constructor(
     private title: Title,
@@ -39,6 +49,7 @@ export class SigninComponent extends ControllerBase {
     public store: Store<any>
   ) {
     super();
+    service.setCurrentUrl(environment.apiUrlLtgo)
 
 
     this.snap.queryParams.subscribe(params => {
@@ -52,7 +63,7 @@ export class SigninComponent extends ControllerBase {
 
   ngOnInit() {
     // Seta o title da pagina
-    this.title.setTitle('CDI | Login');
+    this.title.setTitle('CDI/LTGO | Login');
     
     if(this.param){
       this.message.toastError(this.param, 'Error 401!');
@@ -79,7 +90,7 @@ export class SigninComponent extends ControllerBase {
 
     this.loading = true;
     
-    this.service.login(this.dados.login, this.dados.password).pipe(first())
+    this.service.login(this.dados).pipe(first())
       .subscribe(
         (res) => {
           if(res.message){
@@ -90,11 +101,15 @@ export class SigninComponent extends ControllerBase {
             return this.errorLogin();
           }
 
-          this.store.dispatch(new Login({ token: res.token }));
+          localStorage.setItem(environment.api, res.typeApi);
+          
+          this.store.dispatch(new Login({ token: res.token, tokenApi: res.tokenApi }));
+                    
           localStorage.setItem(environment.tema, res.tema);
           
           const welcome: string = `Bem - Vindo ${res.name},`;
           const message: string = this.getMessage();
+          
           this.message.toastSuccess(message, welcome);
 
           this.loading = false;
@@ -110,6 +125,16 @@ export class SigninComponent extends ControllerBase {
           }, 1500);
         }
       );
+  }
+
+  changePassword(){
+    if(!this.show){
+      this.type = 'text';
+      this.show = true;
+    } else {
+      this.show = false;
+      this.type = 'password'
+    }
   }
 
   public errorLogin(): void {

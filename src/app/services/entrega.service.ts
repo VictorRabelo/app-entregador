@@ -7,10 +7,16 @@ import { BaseService } from './base.service';
 @Injectable({ providedIn: 'root' })
 export class EntregaService extends BaseService {
     
-    baseUrl = environment.apiUrl;
+    urlApi: string;
+
     
-    constructor(http: HttpClient) { 
-        super(http);
+    constructor(private http: HttpClient) { 
+        super();
+        this.currentUrl.subscribe(x => this.urlApi = x);
+    }
+
+    setUrl(url: string): void {
+        this.urlApi = url;
     }
 
     getAll(queryParams: any = {}) {
@@ -24,44 +30,44 @@ export class EntregaService extends BaseService {
             params = new HttpParams().set('aReceber', queryParams.aReceber);
         }
 
-        return this.http.get<any>(`${this.baseUrl}/entregas`, { params: params }).pipe(map(res =>{ return res.response }));
+        return this.http.get<any>(`${this.urlApi}/entregas`, { params: params }).pipe(map(res =>{ return res.response }));
     }
 
     getById(id: number) {
-        return this.http.get<any>(`${this.baseUrl}/entregas/${id}`);
+        return this.http.get<any>(`${this.urlApi}/entregas/${id}`);
     }
     
     update(id: number, update: any) {
-        return this.http.put<any>(`${this.baseUrl}/entregas/${id}`, update);
+        return this.http.put<any>(`${this.urlApi}/entregas/${id}`, update);
     }
 
     baixaEntrega(id: number, dados: any) {
-        return this.http.put<any>(`${this.baseUrl}/entregas/${id}/dar-baixa`, dados);
+        return this.http.put<any>(`${this.urlApi}/entregas/${id}/dar-baixa`, dados);
     }
 
     store(store: any){
-        return this.http.post<any>(`${this.baseUrl}/entregas`, store).pipe(map(res =>{ return res.response }));
+        return this.http.post<any>(`${this.urlApi}/entregas`, store).pipe(map(res =>{ return res.response }));
     }
 
     finishEntrega(dados: any) {
-        return this.http.post<any>(`${this.baseUrl}/entregas/finish`, dados);
+        return this.http.post<any>(`${this.urlApi}/entregas/finish`, dados);
     }
 
     delete(id: number){
-        return this.http.delete<any>(`${this.baseUrl}/entregas/${id}`);
+        return this.http.delete<any>(`${this.urlApi}/entregas/${id}`);
     }
     
     //itens
     createItem(dados: any) {
-        return this.http.post<any>(`${this.baseUrl}/entregas/item`, dados);
+        return this.http.post<any>(`${this.urlApi}/entregas/item`, dados);
     }
     getItemById(id) {
-        return this.http.get<any>(`${this.baseUrl}/entregas/item/${id}`);
+        return this.http.get<any>(`${this.urlApi}/entregas/item/${id}`);
     }
     updateItem(id, dados) {
-        return this.http.put<any>(`${this.baseUrl}/entregas/item/${id}`, dados);
+        return this.http.put<any>(`${this.urlApi}/entregas/item/${id}`, dados);
     }
     deleteItem(id) {
-        return this.http.delete<any>(`${this.baseUrl}/entregas/item/${id}`);
+        return this.http.delete<any>(`${this.urlApi}/entregas/item/${id}`);
     }
 }

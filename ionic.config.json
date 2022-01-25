@@ -1,7 +1,12 @@
 {
-  "name": "app-entregador",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
+  "defaultProject": "app-entregador",
+  "projects": {
+    "app-entregador": {
+      "name": "app-entregador",
+      "integrations": {
+        "cordova": {}
+      },
+      "type": "angular"
+    }
+  }
 }

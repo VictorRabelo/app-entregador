@@ -16,7 +16,8 @@ export class ModalAlterPasswordComponent implements OnInit, OnDestroy {
   private sub = new SubSink();
 
   show: boolean = false;
-
+  
+  validPassowrd: string = '';
   type: string = 'password';
 
   dados: any = {};
@@ -42,17 +43,23 @@ export class ModalAlterPasswordComponent implements OnInit, OnDestroy {
     this.spinner.show();
 
     if(this.dados.password !== this.dados.confirm_password) {
-      this.message.toastError('As senhas não são iguais!');
+      this.validPassowrd = 'invalid';
       this.spinner.hide();
+      
       return false;
+    } else {
+      this.validPassowrd = 'valid';
     }
 
-    this.service.alterSenha(form.value).subscribe(res => {
+    const request = { ...this.dados, app: true};
+
+    this.service.alterSenha(request).subscribe(res => {
       this.spinner.hide();
-    },
-    error => console.log(error),
-    ()=>{
       this.close(true);
+    },
+    error => {
+      this.spinner.hide();
+      console.log(error)
     })
   }
 

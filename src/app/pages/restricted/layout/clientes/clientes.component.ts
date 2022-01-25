@@ -4,10 +4,9 @@ import { ControllerBase } from '@app/controller/controller.base';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteService } from '@app/services/cliente.service';
 import { MessageService } from 'primeng/api';
-
 import { SubSink } from 'subsink';
 import { ClienteFormComponent } from '@app/components/cliente-form/cliente-form.component';
-
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
@@ -15,7 +14,7 @@ import { ClienteFormComponent } from '@app/components/cliente-form/cliente-form.
   providers: [ MessageService ]
 })
 export class ClientesComponent extends ControllerBase {
-  
+
   private sub = new SubSink();
 
   loading: boolean = false;
@@ -31,6 +30,7 @@ export class ClientesComponent extends ControllerBase {
     private modalCtrl: NgbModal,
   ) {
     super();
+    clienteService.setUrl(this.getUrlCurrent());
   }
 
   ngOnInit() {
@@ -78,5 +78,4 @@ export class ClientesComponent extends ControllerBase {
   ngOnDestroy(){
     this.sub.unsubscribe();
   }
-
 }

@@ -58,25 +58,21 @@
             <div class="card-body table-responsive p-0">
               <table class="table table-hover text-nowrap">
                 <thead>
-                  <tr>
-                    <th scope="col">#ID</th>
-                    <th scope="col">Entregador</th>
+                  <tr class="text-center">
+                    <th scope="row">#ID</th>
                     <th scope="col">Data</th>
                     <th scope="col">Qtd. Produtos</th>
                     <th scope="col">Valor Total</th>
-                    <th scope="col">Lucro</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ação</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let item of dataSource | filter:term">
-                  <tr>
+                  <tr class="text-center">
                     <th scope="row">{{ item.id_entrega }}</th>
-                    <td>{{ (!item.entregador)?'Entregador não informado':item.entregador.name | titlecase }}</td>
                     <td>{{ item.created_at }}</td>
                     <td>{{ (!item.qtd_produtos)? '****':item.qtd_produtos }}</td>
                     <td>{{ (!item.total_final)? '****':item.total_final | currency: 'R$' }}</td>
-                    <td>{{ (!item.lucro)? '****':item.lucro | currency: 'R$' }}</td>
                     <td>
                       <div class="d-flex justify-content-center">
                         <span class="badge badge-success" *ngIf="item.status === 'ok' ">Ok</span>

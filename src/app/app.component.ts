@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { ControllerBase } from './controller/controller.base';
 
 import { NgxSpinnerService } from 'ngx-spinner';
-import { HTTPStatus } from './helpers/httpstatus';
 import { RouterOutlet } from '@angular/router';
 import { slideInAppAnimation } from './animations';
+import { BaseService } from './services/base.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -18,19 +19,18 @@ export class AppComponent extends ControllerBase {
   
   title = 'CDI/LTGO';
 
-  constructor(private spinner: NgxSpinnerService) {
+  constructor(
+    private spinner: NgxSpinnerService,
+    private service: BaseService,
+    private auth: AuthService
+  ) {
     super();
-    // this.httpStatus.getHttpStatus().subscribe((status: boolean) => {
-    //   if(status) {
-    //     this.spinner.show();
-    //   }
-    //   else {
-    //     this.spinner.hide();
-    //   }
-    // });
+    service.setCurrentUrl(this.getUrlCurrent());
+    auth.setCurrentUrl(this.getUrlCurrent());
   }
 
   ngOnInit() {
+
   }
 
   prepareRoute(outlet: RouterOutlet) {
