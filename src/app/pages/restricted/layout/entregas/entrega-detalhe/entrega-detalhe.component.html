@@ -20,7 +20,7 @@
           <div class="input-group">
             <input type="text" readonly class="form-control" [(ngModel)]="entregaCurrent.entregador">
             <div class="input-group-append" *ngIf="!entregaCurrent.status">
-              <button class="btn btn-light" (click)="openPessoal()">
+              <button class="btn btn-light">
                 <i class="fas fa-search"></i>
               </button>
             </div>
@@ -42,11 +42,12 @@
         </div>
       </div>
       
-      <div class="table-responsive" style="height: 315px;">
+      <div class="table-responsive" style="height: 80%;">
         <table class="table table-hover text-nowrap">
           <thead>
             <th>#COD</th>
             <th>Qtd.</th>
+            <th>Qtd. disponível</th>
             <th>Foto</th>
             <th>Produto</th>
             <th class="text-right">Valor</th>
@@ -55,6 +56,7 @@
             <tr *ngFor="let item of entregaCurrent.itens;">
               <td>{{ item.produto.id_produto }}</td>
               <td>{{item.qtd_produto | number}}</td>
+              <td>{{item.qtd_disponivel | number}}</td>
               <td>
                 <async-image url="{{ item.produto.path }}"></async-image>
               </td>

@@ -1,9 +1,13 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a [routerLink]="['/restricted/home']" class="brand-link">
-    <img src="/assets/img/logo.jpg" alt="CDI/LTGO" class="brand-image img-circle elevation-2">
-    <span class="brand-text font-weight-light">CDI/LTGO</span>
+  <a [routerLink]="['/restricted/home']" class="brand-link" *ngIf="type === 'cdi'">
+    <img src="/assets/img/logo-cdi.png" alt="CDI" class="brand-image img-circle elevation-2">
+    <span class="brand-text font-weight-light">Casa do Importado</span>
+  </a>
+  <a [routerLink]="['/restricted/home']" class="brand-link" *ngIf="type === 'ltgo'">
+    <img src="/assets/img/logo-ltgo.png" alt="LTGO" class="brand-image img-circle elevation-2">
+    <span class="brand-text font-weight-light">Little Trees Go</span>
   </a>
 
   <!-- Sidebar -->
@@ -32,7 +36,7 @@
           <a [routerLink]="['/restricted/entregas']" routerLinkActive="link-active" class="nav-link">
             <i class="nav-icon fas fa-cubes"></i>
             <p>
-              Estoque
+              Baú
             </p>
           </a>
         </li>
@@ -41,6 +45,14 @@
             <i class="nav-icon fas fa-users"></i>
             <p>
               Clientes
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/restricted/despesas']" routerLinkActive="link-active" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+              Despesas
             </p>
           </a>
         </li>

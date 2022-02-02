@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FilterFormComponent } from '@app/components/filter-form/filter-form.component';
+import { ModalCreateVendaComponent } from '@app/components/modal-create-venda/modal-create-venda.component';
 import { ControllerBase } from '@app/controller/controller.base';
 import { MessageService } from '@app/services/message.service';
 import { VendaService } from '@app/services/venda.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SubSink } from 'subsink';
 
@@ -20,6 +23,7 @@ export class SalesComponent extends ControllerBase {
   loading: boolean = false;
 
   filters: any = { date: '', app: true, typeApi: '' };
+  create: any = {};
 
   totalVendas: number = 0;
   totalMensal: number = 0;
@@ -29,6 +33,7 @@ export class SalesComponent extends ControllerBase {
   term: string;
 
   constructor(
+    private modalCtrl: NgbModal,
     private router: Router,
     private service: VendaService,
     private message: MessageService,
@@ -47,6 +52,19 @@ export class SalesComponent extends ControllerBase {
     this.getAll();
   }
   
+  filterDate() {
+    const modalRef = this.modalCtrl.open(FilterFormComponent, { size: 'sm', backdrop: 'static' });
+    modalRef.result.then(res => {
+      if(res.date){
+        this.filters.date = res.date;
+        this.filters.app = true;
+  
+        this.loading = true;
+        this.getAll();
+      }
+    })
+  }
+
   getAll() {
     this.sub.sink = this.service.getAll(this.filters).subscribe(res => {
       this.dataSource = res.vendas;
@@ -69,37 +87,18 @@ export class SalesComponent extends ControllerBase {
   }
 
   add() {
-    this.message.swal.fire({
-      title: 'Iniciar nova venda?',
-      icon: 'question',
-      inputLabel: 'Selecione a empresa',
-      input: 'radio',
-      inputOptions: {
-        'cdi': 'CDIGO',
-        'ltgo': 'LTGO',
-      },
-      inputValidator: (value) => {
-        if (!value) {
-          return 'É necessário selecionar uma empresa.'
-        }
-      },
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Voltar',
-      showCancelButton: true
-    }).then(res => {
-      
-      this.filters.typeApi = res.value;
-      
-      if (res.isConfirmed) {
-        this.createVenda(this.filters);
+    const modalRef = this.modalCtrl.open(ModalCreateVendaComponent, { size: 'md', backdrop: 'static' });
+    modalRef.result.then(res => {
+      if (res) { 
+        this.createVenda({entrega_id: res});
       }
     })
   }
 
-  createVenda(params) {
+  createVenda(params: any) {
     this.loading = true;
     this.service.store(params).subscribe(res => {
-      this.router.navigate([`/restricted/vendas/${res.id_venda}`],{ queryParams: { typeApi: res.typeApi } });
+      this.router.navigate([`/restricted/vendas/${res.id_venda}`]);
     }, error =>{
       this.loading = false;
       this.message.toastError(error.message)

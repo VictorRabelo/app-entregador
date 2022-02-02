@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { environment } from '@env/environment';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'src/app/services/message.service';
 import { VendaService } from 'src/app/services/venda.service';
@@ -11,6 +12,7 @@ import { VendaService } from 'src/app/services/venda.service';
 export class SaleFinishComponent implements OnInit {
 
   dados: any = {};
+  typeApi:string;
 
   loading: boolean = false;
   validVenda: boolean = true;
@@ -26,7 +28,8 @@ export class SaleFinishComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    this.typeApi = localStorage.getItem(environment.api);
+
     if (!this.data) {
       this.close();
     }
@@ -41,13 +44,17 @@ export class SaleFinishComponent implements OnInit {
 
   finish() {
 
+    this.dados.app = true;
+    
+    if(this.typeApi == 'ltgo'){
+      this.dados.caixa = 'geral';
+    }
+
     if (!this.checkFinish()) {
       return;
     }
 
     this.loading = true;
-
-    this.dados.caixa = 'geral';
     
     this.service.finishSale(this.dados).subscribe(res => {
       this.close(true);
@@ -61,20 +68,27 @@ export class SaleFinishComponent implements OnInit {
   }
 
   checkFinish() {
+    let check = true;
+
     if (!this.dados.caixa) {
       this.message.toastWarning('Tipo de caixa não selecionado!');
-      return false;
+      check = false;
     }
     if (!this.dados.status) {
       this.message.toastWarning('Status da venda não selecionado!');
-      return false;
+      check = false;
     }
     if (!this.dados.pagamento) {
       this.message.toastWarning('Forma de pagamento não selecionado!');
-      return false;
+      check = false;
     }
+    
+    // if (this.dados.restante > 0 || this.dados.restante !== 0)  {
+    //   this.message.toastError('Ainda tem valor restante!');
+    //   check = false;
+    // }
 
-    return true;
+    return check;
   }
 
   calcRestante() {

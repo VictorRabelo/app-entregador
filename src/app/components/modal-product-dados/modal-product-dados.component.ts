@@ -158,6 +158,7 @@ export class ModalProductDadosComponent implements OnInit {
       return;
     }
 
+    this.dados.produto_id = this.dados.id_produto;
     this.dados.preco_venda = this.dados.preco;
     this.dados.lucro_venda = this.dados.preco - this.dados.unitario;
 
@@ -181,6 +182,7 @@ export class ModalProductDadosComponent implements OnInit {
       return;
     }
 
+    this.dados.produto_id = this.dados.id_produto;
     this.dados.preco_venda = this.dados.preco;
     this.dados.lucro_venda = this.dados.preco - this.dados.unitario;
 
@@ -211,7 +213,7 @@ export class ModalProductDadosComponent implements OnInit {
 
   configInputs(dados){
     this.dados.preco = dados.preco_venda;
-    this.dados.und = dados.produto.estoque.und;
+    this.dados.und = dados.produto.und;
     this.dados.path = dados.produto.path;
     this.dados.unitario = dados.produto.unitario;
     this.dados.name = dados.produto.name;

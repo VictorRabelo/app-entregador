@@ -11,10 +11,10 @@
         <span class="badge badge-warning" *ngIf="vendaCurrent.status === 'pendente'">{{vendaCurrent.status}}</span>
         <span class="badge badge-primary" *ngIf="!vendaCurrent.status">Aberta</span>
         <div class="float-right">
-          <button type="button" class="btn btn-success mr-2" (click)="finishSale()" *ngIf="!vendaCurrent.status">
+          <button type="button" class="btn btn-success mr-2 ajuste" (click)="finishSale()" *ngIf="!vendaCurrent.status">
             <i class="fas fa-check"></i> Finalizar
           </button>
-          <button type="button" class="btn btn-primary mr-2" (click)="detailSale()" *ngIf="vendaCurrent.status">
+          <button type="button" class="btn btn-primary mr-2 ajuste" (click)="detailSale()" *ngIf="vendaCurrent.status">
             <i class="fas fa-eye"></i> Detalhes
           </button>
         </div>
@@ -36,10 +36,10 @@
           </div>
         </div>
   
-        <div class="col-sm-2 form-group">
+        <!-- <div class="col-sm-2 form-group">
           <label>Lucro:</label>
           <input type="tel" readonly currencyMask class="form-control" [(ngModel)]="vendaCurrent.lucro">
-        </div>
+        </div> -->
   
         <div class="col-sm-2 form-group">
           <label>Total:</label>
@@ -58,7 +58,7 @@
         </div>
       </div>
   
-      <div class="table-responsive" style="height: 315px;">
+      <div class="table-responsive" style="height: 80%;">
         <table class="table table-hover text-nowrap">
           <thead>
             <th>#COD</th>
@@ -66,7 +66,6 @@
             <th>Foto</th>
             <th>Produto</th>
             <th class="text-right">Valor</th>
-            <th class="text-right">Lucro</th>
             <th class="text-right" *ngIf="!vendaCurrent.status">Ação</th>
           </thead>
           <tbody>
@@ -78,7 +77,6 @@
               </td>
               <td>{{ item.produto.name | titlecase }}</td>
               <td class="text-right">{{ item.preco_venda | currency:'R$' }}</td>
-              <td class="text-right">{{ item.lucro_venda | currency:'R$' }}</td>
               <td class="text-right" *ngIf="!vendaCurrent.status">
                 <button class="btn btn-sm btn-primary mr-2" (click)="openItem(item.id)">
                   <i class="fas fa-pen"></i>
@@ -91,7 +89,7 @@
           </tbody>
           <tbody *ngIf="vendaCurrent.itens.length == 0">
             <tr class="text-center">
-              <td colspan="7">Não há itens no momento</td>
+              <td colspan="6">Não há itens no momento</td>
             </tr>
           </tbody>
         </table>

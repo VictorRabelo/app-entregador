@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
-import { Gesture, GestureController, GestureDetail } from '@ionic/angular';
 
 import { ControllerBase } from '@app/controller/controller.base';
 import { slideInLayoutAnimation } from '@app/animations';
@@ -24,19 +23,17 @@ export class LayoutComponent extends ControllerBase {
 
   @ViewChild('swipeLeft', {static: false}) swipeLeft: ElementRef;
   
-  private gesture: Gesture;
   swiping: boolean = false;
   
   constructor(
     private title: Title,
     private message: MessageService,
-    private gestureCtrl: GestureController,
   ) { 
     super();
   }
 
   ngAfterViewInit() {
-    this.detectSwipe();
+    // this.detectSwipe();
   }
 
   ngOnInit() {
@@ -64,29 +61,29 @@ export class LayoutComponent extends ControllerBase {
     });
   }
 
-  detectSwipe() {
-    this.gesture = this.gestureCtrl.create({
-      el: this.swipeLeft.nativeElement,
-      gestureName: 'swipe-left',
-      threshold: 0,
-      onMove: event => this.onMove(event),
-    }, true);
+  // detectSwipe() {
+  //   this.gesture = this.gestureCtrl.create({
+  //     el: this.swipeLeft.nativeElement,
+  //     gestureName: 'swipe-left',
+  //     threshold: 0,
+  //     onMove: event => this.onMove(event),
+  //   }, true);
 
-    this.gesture.enable();
-  }
+  //   this.gesture.enable();
+  // }
   
-  onMove(event: GestureDetail) {
-    return
-    const deltaX:number = event.deltaX;
-    const startX: number = event.startX;
+  // onMove(event: GestureDetail) {
+  //   return
+  //   const deltaX:number = event.deltaX;
+  //   const startX: number = event.startX;
     
-    const velocityX: number = event.velocityX;
-    const time: number = 1;
+  //   const velocityX: number = event.velocityX;
+  //   const time: number = 1;
 
-    if(deltaX > startX && velocityX > time) {
-      document.body.classList.remove('sidebar-closed');
-      document.body.classList.remove('sidebar-collapse');
-      document.body.classList.add('sidebar-open');
-    }
-  }
+  //   if(deltaX > startX && velocityX > time) {
+  //     document.body.classList.remove('sidebar-closed');
+  //     document.body.classList.remove('sidebar-collapse');
+  //     document.body.classList.add('sidebar-open');
+  //   }
+  // }
 }

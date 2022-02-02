@@ -37,7 +37,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgbDropdownModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersComponent } from './users/users.component';
 import { MatButtonModule, MatIconModule } from '@angular/material';
-import { IonicModule } from '@ionic/angular';
+import { DespesasComponent } from './despesas/despesas.component';
  
 export const customCurrencyMaskConfig = {
     align: "left",
@@ -80,7 +80,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     NgbDropdownModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     NgxMaskModule.forRoot(),
-    IonicModule.forRoot(),
 
   ],
   declarations: [
@@ -97,6 +96,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     UsersComponent,
     EntregasComponent,
     EntregaDetalheComponent,
+    DespesasComponent
 
   ],
   entryComponents: [

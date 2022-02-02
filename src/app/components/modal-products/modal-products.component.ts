@@ -14,7 +14,7 @@ export class ModalProductsComponent implements OnInit {
 
   dataSource: any[] = [];
 
-  filters = {status: 'ok'}
+  filters: any = { app: true, status: 'ok' };
   loading: boolean = false;
 
   @Input() data: any;
@@ -29,6 +29,10 @@ export class ModalProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.data){
+      this.filters.id_entrega = this.data.entrega_id
+    }
+    
     this.listing();
 
   }
@@ -39,7 +43,7 @@ export class ModalProductsComponent implements OnInit {
 
   listing() {
     this.loading = true;
-    this.service.getAll(this.filters).subscribe(res => {
+    this.service.getAllItem(this.filters).subscribe(res => {
       this.dataSource = res;
     }, error => {
       console.log(error)

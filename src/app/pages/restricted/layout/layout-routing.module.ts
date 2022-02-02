@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { SalesComponent } from './sales/sales.component';
 import { SaleDetalheComponent } from './sales/sale-detalhe/sale-detalhe.component';
 import { EntregaDetalheComponent } from './entregas/entrega-detalhe/entrega-detalhe.component';
+import { DespesasComponent } from './despesas/despesas.component';
 
 const routes: Routes = [
   
@@ -33,6 +34,7 @@ const routes: Routes = [
 
   {path: 'usuarios', component: UsersComponent, data: { animation: 'UsuariosPage' }},
   
+  {path: 'despesas', component: DespesasComponent, data: { animation: 'DespesasPage' }},
 ];
   
 @NgModule({

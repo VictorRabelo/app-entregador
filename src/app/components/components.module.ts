@@ -10,11 +10,13 @@ import { ModalPessoalComponent } from './modal-pessoal/modal-pessoal.component';
 import { ModalProductsComponent } from './modal-products/modal-products.component';
 import { ModalProductDadosComponent } from './modal-product-dados/modal-product-dados.component';
 import { ModalAlterPasswordComponent } from './modal-alter-password/modal-alter-password.component';
+import { ModalCreateVendaComponent } from './modal-create-venda/modal-create-venda.component';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UtilModule } from '@app/util/util.module';
+import { FilterFormComponent } from './filter-form/filter-form.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -38,6 +40,8 @@ export const customCurrencyMaskConfig = {
     ModalProductsComponent,
     ModalProductDadosComponent,
     ModalAlterPasswordComponent,
+    ModalCreateVendaComponent,
+    FilterFormComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +59,8 @@ export const customCurrencyMaskConfig = {
     ModalProductsComponent,
     ModalProductDadosComponent,
     ModalAlterPasswordComponent,
+    ModalCreateVendaComponent,
+    FilterFormComponent
   ],
   entryComponents: [
     ClienteFormComponent,
@@ -62,6 +68,8 @@ export const customCurrencyMaskConfig = {
     ModalProductsComponent,
     ModalProductDadosComponent,
     ModalAlterPasswordComponent,
+    ModalCreateVendaComponent,
+    FilterFormComponent
   ],
 })
 export class ComponentsModule { }

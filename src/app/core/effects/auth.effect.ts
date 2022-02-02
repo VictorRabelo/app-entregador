@@ -76,9 +76,6 @@ export class AuthEffects {
   }
 
   removeStorage(): void {
-    localStorage.removeItem(environment.authTokenKey);
-    localStorage.removeItem(environment.authTokenKeyCdi);
-    localStorage.removeItem(environment.tema);
-    localStorage.removeItem(environment.api);
+    localStorage.clear();
   }
 }

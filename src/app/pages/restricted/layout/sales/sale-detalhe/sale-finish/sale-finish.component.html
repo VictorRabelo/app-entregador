@@ -13,10 +13,6 @@
             <label>Total:</label>
             <input type="text" currencyMask readonly class="form-control" name="total_final" [(ngModel)]="dados.total_final">
           </div>
-          <div class="form-group">
-            <label>Lucro:</label>
-            <input type="text" currencyMask readonly class="form-control" name="lucro" [(ngModel)]="dados.lucro">
-          </div>
           <div class="form-group" *ngIf="type == 'finish'">
             <label>Pagar:</label>
             <input type="text" currencyMask class="form-control" name="debitar" [(ngModel)]="dados.debitar" (focus)="configCalc()" (blur)="calcRestante()">
@@ -50,6 +46,15 @@
                 <option value="pendente">Pendente</option>
                 <option value="pago">Pago</option>
               </select>
+          </div>
+          <div class="form-group" *ngIf="typeApi == 'cdi'">
+            <label>{{ (type == 'finish')? '*':'' }}Tipo de Caixa:</label>
+            <select class="form-control" required name="caixa" [(ngModel)]="dados.caixa" #caixa="ngModel"
+                [ngClass]="{'is-invalid': !validVenda}" [disabled]="type == 'detail'">
+              <option value="">Selecione um caixa</option>
+              <option value="geral">Geral</option>
+              <option value="eletronico">Eletrônico</option>
+            </select>
           </div>
           <div class="form-group" *ngIf="type == 'finish' && dados.status != 'pago'">
             <label for="prazo" class="fieldset">A prazo?:</label>                            

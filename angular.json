@@ -45,40 +45,7 @@
               "node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
               "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
               "node_modules/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
-              "src/styles.css",
-              {
-                "input": "node_modules/@ionic/angular/css/core.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/normalize.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/structure.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/typography.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/display.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/padding.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/float-elements.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/text-alignment.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/text-transformation.css"
-              },
-              {
-                "input": "node_modules/@ionic/angular/css/flex-utils.css"
-              },
-              {
-                "input": "src/theme/variables.css"
-              }
+              "src/styles.css"
             ],
             "scripts": [
               "node_modules/izitoast/dist/js/iziToast.min.js",
@@ -161,11 +128,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              {
-                "glob": "**/*.svg",
-                "input": "node_modules/ionicons/dist/ionicons/svg",
-                "output": "./svg"
-              },
               "src/manifest.webmanifest"
             ],
             "styles": [
@@ -197,30 +159,6 @@
           "configurations": {
             "production": {
               "devServerTarget": "app-entregador:serve:production"
-            }
-          }
-        },
-        "ionic-cordova-serve": {
-          "builder": "@ionic/angular-toolkit:cordova-serve",
-          "options": {
-            "cordovaBuildTarget": "app-entregador:ionic-cordova-build",
-            "devServerTarget": "app-entregador:serve"
-          },
-          "configurations": {
-            "production": {
-              "cordovaBuildTarget": "app-entregador:ionic-cordova-build:production",
-              "devServerTarget": "app-entregador:serve:production"
-            }
-          }
-        },
-        "ionic-cordova-build": {
-          "builder": "@ionic/angular-toolkit:cordova-build",
-          "options": {
-            "browserTarget": "app-entregador:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "app-entregador:build:production"
             }
           }
         }

@@ -11,6 +11,7 @@ import { ModalPessoalComponent } from '@app/components/modal-pessoal/modal-pesso
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from '@app/services/message.service';
+import { ControllerBase } from '@app/controller/controller.base';
 
 
 @Component({
@@ -28,9 +29,9 @@ import { MessageService } from '@app/services/message.service';
     )
   ],
 })
-export class SaleDetalheComponent implements OnInit {
+export class SaleDetalheComponent extends ControllerBase {
 
-  vendaCurrent: any = { cliente: 'Selecione um cliente', itens: [] };
+  vendaCurrent: any = { cliente: 'Selecione um cliente', itens: []};
 
   loading: boolean = false;
 
@@ -39,12 +40,16 @@ export class SaleDetalheComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private service: VendaService,
     private message: MessageService,
-  ) { }
+  ) { 
+    super();
+    service.setUrl(this.getUrlCurrent());
+  }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(params => {
       this.getById(params.id);
     }).unsubscribe();
+
   }
 
   getById(id) {
@@ -76,7 +81,7 @@ export class SaleDetalheComponent implements OnInit {
       return;
     }
     
-    if(!this.vendaCurrent.cliente){
+    if(!this.vendaCurrent.cliente_id){
       this.message.toastError('Está faltando o cliente!');
       return;
     }

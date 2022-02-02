@@ -1,5 +1,9 @@
-@media (min-width: 750px) {
+@media (max-width: 750px) {
     .btn-debitar{
         margin-top: 32px !important;
-   }
+    }
+
+    .ajuste {
+        margin-top: 5px;
+    }
 }

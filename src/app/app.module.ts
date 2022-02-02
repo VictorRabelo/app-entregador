@@ -1,5 +1,4 @@
 import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -70,9 +69,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-
-    IonicModule.forRoot(),
-
     
     ComponentsModule,
     UtilModule,
@@ -111,7 +107,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     }),
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forRoot([AuthEffects]),
-    IonicModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [

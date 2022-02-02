@@ -32,6 +32,10 @@ export class EntregaService extends BaseService {
 
         return this.http.get<any>(`${this.urlApi}/entregas`, { params: params }).pipe(map(res =>{ return res.response }));
     }
+    
+    getAllProducts(queryParams: any = {}) {
+        return this.http.get<any>(`${this.urlApi}/entregas`, { params: queryParams }).pipe(map(res =>{ return res.response }));
+    }
 
     getById(id: number) {
         return this.http.get<any>(`${this.urlApi}/entregas/${id}`);
@@ -58,6 +62,10 @@ export class EntregaService extends BaseService {
     }
     
     //itens
+    getAllItem(params: any) {
+        return this.http.get<any>(`${this.urlApi}/entregas/item`, { params: {...params} });
+    }
+    
     createItem(dados: any) {
         return this.http.post<any>(`${this.urlApi}/entregas/item`, dados);
     }

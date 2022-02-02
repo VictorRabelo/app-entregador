@@ -19,17 +19,8 @@ export class VendaService extends BaseService{
     }
 
     getAll(queryParams: any = {}) {
-        let params = new HttpParams().set('app', queryParams.app);
-        
-        if(queryParams.date !== ''){
-            params = new HttpParams().append('date', queryParams.date);
-        }
-        
-        if(queryParams.typeApi !== ''){
-            params = new HttpParams().append('typeApi', queryParams.typeApi);
-        }
 
-        return this.http.get<any>(`${this.urlApi}/vendas`, { params: params }).pipe(map(res =>{ return res.response }));
+        return this.http.get<any>(`${this.urlApi}/vendas`, { params: queryParams }).pipe(map(res =>{ return res.response }));
     }
 
     getById(id: number) {
@@ -57,7 +48,7 @@ export class VendaService extends BaseService{
         return this.http.post<any>(`${this.urlApi}/vendas/item`, dados);
     }
     getItemById(id) {
-        return this.http.get<any>(`${this.urlApi}/vendas/item/${id}`);
+        return this.http.get<any>(`${this.urlApi}/vendas/item/${id}/app`);
     }
     updateItem(id, dados) {
         return this.http.put<any>(`${this.urlApi}/vendas/item/${id}`, dados);

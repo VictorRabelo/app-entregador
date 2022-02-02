@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ModalAlterPasswordComponent } from '@app/components/modal-alter-password/modal-alter-password.component';
 import { ControllerBase } from '@app/controller/controller.base';
 import { MessageService } from '@app/services/message.service';
+import { environment } from '@env/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare let $: any;
@@ -13,6 +14,7 @@ declare let $: any;
   encapsulation: ViewEncapsulation.None
 })
 export class SidebarComponent extends ControllerBase {
+  type: any;
 
   constructor(
     private modalCtrl: NgbModal,
@@ -22,6 +24,7 @@ export class SidebarComponent extends ControllerBase {
   }
 
   ngOnInit() {
+    this.type = localStorage.getItem(environment.api);
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })

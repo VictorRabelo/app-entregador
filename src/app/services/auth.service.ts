@@ -30,8 +30,8 @@ export class AuthService extends BaseService {
     return this.http.get(`${this.urlApi}/oauth/logout`).toPromise();
   }
 
-  getUserByToken(queryParams: any = {}): Promise<any> {
-    return this.http.get(`${this.urlApi}/oauth/me`, { params: queryParams }).toPromise();
+  async getUserByToken(queryParams: any = {}): Promise<any> {
+    return await this.http.get(`${this.urlApi}/oauth/me`, { params: queryParams }).toPromise();
   }
 
   alterSenha(dados) {

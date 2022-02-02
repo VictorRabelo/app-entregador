@@ -9,23 +9,10 @@
           <h1 class="m-0">Vendas / Mês {{ today | date:'MM' }}</h1>
         </div>
         
-        <div class="col-3">
-          <select class="form-control d-inline" name="date" [(ngModel)]="filters.date" (change)="getAll()">
-            <option selected value="" *ngIf="filters.date == ''">Aguarde...</option>
-            <option value="0">Todas</option>
-            <option value="01">Janeiro</option>
-            <option value="02">Fevereiro</option>
-            <option value="03">Março</option>
-            <option value="04">Abril</option>
-            <option value="05">Maio</option>
-            <option value="06">Junho</option>
-            <option value="07">Julho</option>
-            <option value="08">Agosto</option>
-            <option value="09">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-          </select>                  
+        <div class="col-3 text-right">
+          <button class="btn btn-primary btn-md" title="Filtro de Pesquisa" (click)="filterDate()">
+            <i class="fas fa-search"></i>
+          </button>           
         </div>
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -36,22 +23,9 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-              
-        <div class="col-6">
-          <label class="text-danger text-totalizer">Total de vendas: </label>
-          <span class="colorMoney">{{ totalVendas | currency: 'R$' }}</span>
-        </div>
         <div class="col-6">
           <label class="text-danger text-totalizer">Vendas do mês: </label>
           <span class="colorMoney">{{ totalMensal | currency: 'R$' }}</span>
-        </div>
-        <div class="col-6">
-          <label class="text-danger text-totalizer">Recebido: </label>
-          <span class="colorMoney">{{ recebido | currency: 'R$' }}</span>
-        </div>
-        <div class="col-6">
-          <label class="text-danger text-totalizer">Lucro: </label>
-          <span class="colorMoney">{{ lucro | currency: 'R$' }}</span>
         </div>
       </div>
       
@@ -90,7 +64,6 @@
                     <th scope="col">Pagamento</th>
                     <th scope="col">Valor Total</th>
                     <th scope="col">Pago</th>
-                    <th scope="col">Lucro</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ação</th>
                   </tr>
@@ -104,7 +77,6 @@
                     <td>{{ (!item.pagamento)?'****':item.pagamento | titlecase }}</td>
                     <td>{{ (!item.total_final)? '****':item.total_final | currency: 'R$' }}</td>
                     <td>{{ (!item.pago)? '****':item.pago | currency: 'R$' }}</td>
-                    <td>{{ (!item.lucro)? '****':item.lucro | currency: 'R$' }}</td>
                     <td>
                       <div class="d-flex justify-content-center">
                         <span class="badge badge-success" *ngIf="item.status === 'pago' ">Pago</span>
