@@ -20,7 +20,7 @@
                             <th scope="col">Ação</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let item of dataSource | filter:term">
+                    <tbody *ngFor="let item of dataSource">
                         <tr class="text-center">
                             <th scope="row">{{ item.id_entrega }}</th>
                             <td>{{ item.created_at }}</td>
