@@ -42,11 +42,7 @@ export class EntregasComponent implements OnInit, OnDestroy {
 
   getAll() {
     this.sub.sink = this.service.getAll(this.filters).subscribe(res => {
-      this.dataSource = res.entregas;
-      this.totalVendas = res.totalVendas;
-      this.today = res.data;
-      this.filters.date = res.mounth;
-
+      this.dataSource = res;
     },error =>{
       
       this.loading = false;

@@ -20,17 +20,7 @@ export class EntregaService extends BaseService {
     }
 
     getAll(queryParams: any = {}) {
-        let params
-        
-        if(queryParams.date){
-            params = new HttpParams().set('date', queryParams.date);
-        }
-        
-        if(queryParams.aReceber){
-            params = new HttpParams().set('aReceber', queryParams.aReceber);
-        }
-
-        return this.http.get<any>(`${this.urlApi}/entregas`, { params: params }).pipe(map(res =>{ return res.response }));
+        return this.http.get<any>(`${this.urlApi}/entregas`, { params: queryParams }).pipe(map(res =>{ return res.response }));
     }
     
     getAllProducts(queryParams: any = {}) {
