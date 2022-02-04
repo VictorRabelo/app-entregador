@@ -31,6 +31,7 @@ export class DespesasComponent extends ControllerBase {
     private despesaService: DespesaService
   ) { 
     super();
+    despesaService.setUrl(this.getUrlCurrent());
   }
 
   ngOnInit() {
