@@ -26,13 +26,13 @@
       </div>
 
       <div class="col-sm-3 form-group">
-        <label>Preço sugerido:</label>
+        <label class="format-text">Preço sugerido:</label>
         <input type="text" readonly required currencyMask class="form-control" name="unitario"
           [(ngModel)]="dados.unitario" #unitario="ngModel" />
       </div>
 
       <div class="col-sm-3 form-group">
-        <label style="font-size: 13px;">*Preço de Venda:</label>
+        <label class="format-text">*Preço de Venda:</label>
         <input type="text" required currencyMask class="form-control" name="preco"
           [(ngModel)]="dados.preco" #preco="ngModel"
           [ngClass]="{'is-invalid': !preco.valid && (preco.touched || form.submitted)}" />
