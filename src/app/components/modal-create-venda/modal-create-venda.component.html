@@ -24,7 +24,7 @@
                         <tr class="text-center">
                             <th scope="row">{{ item.id_entrega }}</th>
                             <td>{{ item.created_at }}</td>
-                            <td>{{ (!item.qtd_disponivel)? '****':item.qtd_disponivel }}</td>
+                            <td>{{ (!item.qtd_disponiveis)? '****':item.qtd_disponiveis }}</td>
                             <td>{{ (!item.total_final)? '****':item.total_final | currency: 'R$' }}</td>
                             <td>
                                 <button class="btn btn-primary btn-sm mx-2" title="Editar"
