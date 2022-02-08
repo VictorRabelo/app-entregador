@@ -6,26 +6,7 @@
       <div class="row mb-2">
         
         <div class="col-9">
-          <h1 class="m-0">Baú / Mês {{ today | date:'MM' }}</h1>
-        </div>
-        
-        <div class="col-3">
-          <select class="form-control d-inline" name="date" [(ngModel)]="filters.date" (change)="getAll()">
-            <option selected value="" *ngIf="filters.date == ''">Aguarde...</option>
-            <option value="0">Todas</option>
-            <option value="01">Janeiro</option>
-            <option value="02">Fevereiro</option>
-            <option value="03">Março</option>
-            <option value="04">Abril</option>
-            <option value="05">Maio</option>
-            <option value="06">Junho</option>
-            <option value="07">Julho</option>
-            <option value="08">Agosto</option>
-            <option value="09">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-          </select>                     
+          <h1 class="m-0">Baú</h1>
         </div>
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
