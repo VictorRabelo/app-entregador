@@ -18,7 +18,7 @@ export class EntregasComponent implements OnInit, OnDestroy {
 
   loading: boolean = false;
 
-  filters: any = { app: true, date: '' };
+  filters: any = { app: true, typeSearch: 'bau', date: '' };
 
   totalVendas: number = 0;
   

@@ -16,7 +16,7 @@
       </div>
     
       <div class="table-responsive p-0">
-        <table class="table table-hover text-nowrap">
+        <table class="table table-hover text-nowrap text-center">
           <thead>
             <tr>
               <th scope="col">#COD</th>
@@ -38,7 +38,7 @@
               <td>{{ item.und }}</td>
               <td>{{ item.preco | currency: 'R$' }}</td>
               <td>{{ item.data_pedido | date: 'dd/MM/yyyy' }}</td>
-              <td class="text-center">
+              <td>
                 <button type="button" class="btn btn-sm btn-primary" (click)="openProduct(item)">
                   <i class="fas fa-check"></i>
                 </button>
@@ -46,7 +46,7 @@
             </tr>
           </tbody>
           <tbody *ngIf="dataSource.length == 0 ">
-            <tr class="text-center">
+            <tr>
                 <td colspan="7">Não há produtos em estoque!</td>
             </tr>
           </tbody>

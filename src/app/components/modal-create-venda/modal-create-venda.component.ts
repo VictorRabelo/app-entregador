@@ -16,7 +16,7 @@ export class ModalCreateVendaComponent extends ControllerBase {
   loading: boolean = false;
   
   dataSource: any[] = [];
-  filters: any = { app: true, filterEntregas: true };
+  filters: any = { app: true, typeSearch: 'sales' };
 
   constructor(
     private service: EntregaService,
