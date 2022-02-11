@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FilterFormComponent } from '@app/components/filter-form/filter-form.component';
 
 import { ControllerBase } from '@app/controller/controller.base';
 import { DespesaService } from '@app/services/despesa.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { MessageService } from 'primeng/api';
 
@@ -26,7 +28,10 @@ export class DespesasComponent extends ControllerBase {
 
   saldo: number = 0;
   
+  filters: any = { date: '' };
+
   constructor(
+    private modalCtrl: NgbModal,
     private messageService: MessageService, 
     private despesaService: DespesaService
   ) { 
@@ -39,8 +44,20 @@ export class DespesasComponent extends ControllerBase {
     this.getAll();
   }
  
+  filterDate() {
+    const modalRef = this.modalCtrl.open(FilterFormComponent, { size: 'sm', backdrop: 'static' });
+    modalRef.result.then(res => {
+      if(res.date){
+        this.filters.date = res.date;
+  
+        this.loading = true;
+        this.getAll();
+      }
+    })
+  }
+
   getAll(){
-    this.sub.sink = this.despesaService.getAll().subscribe(
+    this.sub.sink = this.despesaService.getAll(this.filters).subscribe(
       (res: any) => {
         this.loading = false;
         this.despesas = res.response;

@@ -21,8 +21,8 @@ export class DespesaService extends BaseService {
         this.urlApi = url;
     }
 
-    getAll() {
-        return this.http.get<any>(`${this.urlApi}/despesas-entrega`);
+    getAll(queryParams: any = {}) {
+        return this.http.get<any>(`${this.urlApi}/despesas-entrega`, { params: queryParams });
     }
     
     getMovimentacao() {
