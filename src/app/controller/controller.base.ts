@@ -9,11 +9,12 @@ import 'bootstrap';
 import { select, Store } from '@ngrx/store';
 import { currentUser } from '@app/core/selectors/auth.selector';
 import { environment } from '@env/environment';
+import { AppState } from '@app/core/reducers';
 
 @Injectable({providedIn: "root"})
 export class ControllerBase implements OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
     public currentUser: any = {};
-    public store: Store<any>;
+    public store: Store<AppState>;
 
     constructor() {}
 

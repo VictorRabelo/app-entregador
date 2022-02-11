@@ -3,8 +3,10 @@ import { NgForm } from '@angular/forms';
 import { FilterFormComponent } from '@app/components/filter-form/filter-form.component';
 
 import { ControllerBase } from '@app/controller/controller.base';
+import { currentUser } from '@app/core/selectors/auth.selector';
 import { DespesaService } from '@app/services/despesa.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { select, Store } from '@ngrx/store';
 
 import { MessageService } from 'primeng/api';
 
@@ -29,14 +31,22 @@ export class DespesasComponent extends ControllerBase {
   saldo: number = 0;
   
   filters: any = { date: '' };
+  dados: any = {};
+  user: any = {};
 
   constructor(
     private modalCtrl: NgbModal,
     private messageService: MessageService, 
-    private despesaService: DespesaService
+    private despesaService: DespesaService,
+    public store: Store<any>
   ) { 
     super();
     despesaService.setUrl(this.getUrlCurrent());
+    this.store.pipe(select(currentUser)).subscribe(res => {
+      if (res) {
+        this.user = res
+      }
+    })
   }
 
   ngOnInit() {
@@ -79,7 +89,9 @@ export class DespesasComponent extends ControllerBase {
       return;
     }
 
-    this.despesaService.store(form.value).subscribe(
+    this.dados.entregador_login = this.user.login;
+    
+    this.despesaService.store(this.dados).subscribe(
       (res: any) => {
         this.loading = true;
         this.getAll();

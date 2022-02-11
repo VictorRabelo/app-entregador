@@ -95,13 +95,17 @@
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     <label for="valor" class="fieldset">*Valor:</label>
-                                    <input type="text" class="form-control" name="valor" currencyMask ngModel required>
+                                    <input type="text" required class="form-control" name="valor" 
+                                        [(ngModel)]="dados.valor" #valor="ngModel" currencyMask
+                                        [ngClass]="{'is-invalid': !valor.valid && (valor.touched || form.submitted)}" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-12">
-                                    <label for="valor" class="fieldset">*Descrição:</label>
-                                    <input type="text" class="form-control" name="descricao" ngModel placeholder="Descrição" required>
+                                    <label for="descricao" class="fieldset">*Descrição:</label>
+                                    <input type="text" required class="form-control" name="descricao" 
+                                        [(ngModel)]="dados.descricao" #descricao="ngModel"
+                                        [ngClass]="{'is-invalid': !descricao.valid && (descricao.touched || form.submitted)}" />
                                 </div>
                             </div>
                         </div>
