@@ -37,7 +37,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-              <table class="table table-hover text-nowrap">
+              <table class="table table-hover text-nowrap text-center">
                 <thead>
                   <tr class="text-center">
                     <th scope="row">#ID</th>
@@ -55,11 +55,9 @@
                     <td>{{ (!item.qtd_produtos)? '****':item.qtd_produtos }}</td>
                     <td>{{ (!item.total_final)? '****':item.total_final | currency: 'R$' }}</td>
                     <td>
-                      <div class="d-flex justify-content-center">
-                        <span class="badge badge-success" *ngIf="item.status === 'ok' ">Finalizada</span>
-                        <span class="badge badge-warning" *ngIf="item.status === 'pendente' ">Na rua</span>
-                        <span class="badge badge-primary" *ngIf="!item.status">Aberta</span>
-                      </div>
+                      <span class="badge badge-success" *ngIf="item.status === 'ok' ">Finalizada</span>
+                      <span class="badge badge-warning" *ngIf="item.status === 'pendente' ">Na rua</span>
+                      <span class="badge badge-primary" *ngIf="!item.status">Aberta</span>
                     </td>
                     <td>
                       <button class="btn btn-primary btn-sm mx-2" title="Editar" (click)="editVenda(item.id_entrega)">
