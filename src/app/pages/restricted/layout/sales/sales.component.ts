@@ -98,6 +98,12 @@ export class SalesComponent extends ControllerBase {
   createVenda(params: any) {
     this.loading = true;
     this.service.store(params).subscribe(res => {
+      if(res.message) {
+        this.message.toastError(res.message);
+        this.loading = false;
+        return false;
+      };
+      
       this.router.navigate([`/restricted/vendas/${res.id_venda}`]);
     }, error =>{
       this.loading = false;
