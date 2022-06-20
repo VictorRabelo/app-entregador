@@ -107,7 +107,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     }),
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forRoot([AuthEffects]),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

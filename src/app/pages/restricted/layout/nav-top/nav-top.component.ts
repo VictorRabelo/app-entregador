@@ -40,8 +40,17 @@ export class NavTopComponent extends ControllerBase {
     private message: MessageService,
     private service: UserService,
     public store: Store<any>
-  ) { 
+  ) {
     super();
+    if(window.performance.navigation.type == 1){
+      
+      let url = window.location.href;
+      const urlCurrent = url.split('/')[5];
+
+      if(urlCurrent !== 'home') {
+        router.navigate(['/restricted/home']);
+      }
+    }
     this.store.pipe(select(currentUser)).subscribe(res => {
       if (res) {
         this.user = res
@@ -159,9 +168,7 @@ export class NavTopComponent extends ControllerBase {
       localStorage.setItem(environment.api, 'cdi');
       this.navApiCdi = true;
     }
-    
+      
     document.location.reload();
-    
-    return;
   }
 }

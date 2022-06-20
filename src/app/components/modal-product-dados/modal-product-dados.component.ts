@@ -6,6 +6,7 @@ import { EntregaService } from '@app/services/entrega.service';
 import { MessageService } from '@app/services/message.service';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-modal-product-dados',
@@ -157,12 +158,21 @@ export class ModalProductDadosComponent implements OnInit {
       this.loading = false;
       return;
     }
+    
+    const api = localStorage.getItem(environment.api);
 
     this.dados.produto_id = this.dados.id_produto;
     this.dados.preco_venda = this.dados.preco;
-    this.dados.lucro_venda = this.dados.preco - this.dados.unitario;
-    this.dados.app = true;
+    
+    if(api == 'cdi') {
+      this.dados.lucro_venda = this.dados.preco - this.dados.valor_total;
+      
+    } else {
+      this.dados.lucro_venda = this.dados.preco - this.dados.unitario;
+    }
 
+    this.dados.app = true;
+    
     this.serviceSale.createItem(this.dados).subscribe(res => {
       this.message.toastSuccess();
       this.close(res);
@@ -182,10 +192,18 @@ export class ModalProductDadosComponent implements OnInit {
       this.loading = false;
       return;
     }
+    
+    const api = localStorage.getItem(environment.api);
 
     this.dados.produto_id = this.dados.id_produto;
     this.dados.preco_venda = this.dados.preco;
-    this.dados.lucro_venda = this.dados.preco - this.dados.unitario;
+    
+    if(api == 'cdi') {
+      this.dados.lucro_venda = this.dados.preco - this.dados.valor_total;
+      
+    } else {
+      this.dados.lucro_venda = this.dados.preco - this.dados.unitario;
+    }
 
     this.serviceSale.updateItem(this.dados.id, this.dados).subscribe(res => {
       this.message.toastSuccess('Atualizada com sucesso!');

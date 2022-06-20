@@ -1,17 +1,29 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a [routerLink]="['/restricted/home']" class="brand-link" *ngIf="type === 'cdi'">
+  <a [routerLink]="['/restricted/home']" class="brand-link text-center" *ngIf="type === 'cdi'">
     <img src="/assets/img/logo-cdi.png" alt="CDI" class="brand-image img-circle elevation-2">
     <span class="brand-text font-weight-light">Casa do Importado</span>
   </a>
-  <a [routerLink]="['/restricted/home']" class="brand-link" *ngIf="type === 'ltgo'">
+  <a [routerLink]="['/restricted/home']" class="brand-link text-center" *ngIf="type === 'ltgo'">
     <img src="/assets/img/logo-ltgo.png" alt="LTGO" class="brand-image img-circle elevation-2">
     <span class="brand-text font-weight-light">Little Trees Go</span>
   </a>
 
   <!-- Sidebar -->
   <div class="sidebar">
+    <div class="user-panel my-2 text-center">
+      <div class="info">
+        <a href="#" class="d-block" *ngIf="!loading">{{ user.name | uppercase }}</a>
+        <a class="d-block" *ngIf="loading">
+          <span>
+            <div class="spinner-border ml-2 mb-1 text-white spinner-border-sm" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </span>
+        </a>
+      </div>
+    </div>
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" (click)="closeSide()">

@@ -54,7 +54,7 @@ export class HomeComponent extends ControllerBase {
   constructor(
     @Inject(DOCUMENT) private document: any, 
     private dashboardService: DashboardService
-  ) { 
+  ) {
     super();
     dashboardService.setUrl(this.getUrlCurrent());
   }

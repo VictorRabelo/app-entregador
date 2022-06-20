@@ -16,7 +16,6 @@
                             <th scope="row">#ID</th>
                             <th scope="col">Data</th>
                             <th scope="col">Qtd. Produtos</th>
-                            <th scope="col">Valor Total</th>
                             <th scope="col">Ação</th>
                         </tr>
                     </thead>
@@ -25,7 +24,6 @@
                             <th scope="row">{{ item.id_entrega }}</th>
                             <td>{{ item.created_at }}</td>
                             <td>{{ (!item.qtd_disponiveis)? '****':item.qtd_disponiveis }}</td>
-                            <td>{{ (!item.total_final)? '****':item.total_final | currency: 'R$' }}</td>
                             <td>
                                 <button class="btn btn-primary btn-sm mx-2" title="Editar"
                                     (click)="selecionarEntrega(item.id_entrega)">
@@ -36,7 +34,7 @@
                     </tbody>
                     <tbody *ngIf="dataSource.length == 0">
                         <tr class="text-center">
-                            <td colspan="8">Não há entregas no momento</td>
+                            <td colspan="4">Não há entregas no momento</td>
                         </tr>
                     </tbody>
                 </table>

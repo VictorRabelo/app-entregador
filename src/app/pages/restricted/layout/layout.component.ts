@@ -37,9 +37,7 @@ export class LayoutComponent extends ControllerBase {
   }
 
   ngOnInit() {
-    
     this.title.setTitle('CDI/LTGO | Dashboard');
-
   }
 
   prepareRoute(outlet: RouterOutlet) {

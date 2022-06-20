@@ -65,18 +65,20 @@
             <th>Qtd.</th>
             <th>Foto</th>
             <th>Produto</th>
-            <th class="text-right">Valor</th>
+            <th class="text-right">Valor Unitário</th>
+            <th class="text-right">Valor Total</th>
             <th class="text-right" *ngIf="!vendaCurrent.status">Ação</th>
           </thead>
           <tbody>
             <tr *ngFor="let item of vendaCurrent.itens;">
               <td>{{ item.produto.id_produto }}</td>
-              <td>{{item.qtd_venda | number}}</td>
+              <td>{{ item.qtd_venda | number }}</td>
               <td>
                 <async-image url="{{ item.produto.path }}"></async-image>
               </td>
               <td>{{ item.produto.name | titlecase }}</td>
               <td class="text-right">{{ item.preco_venda | currency:'R$' }}</td>
+              <td class="text-right">{{ item.preco_venda * item.qtd_venda | currency:'R$' }}</td>
               <td class="text-right" *ngIf="!vendaCurrent.status">
                 <button class="btn btn-sm btn-primary mr-2" (click)="openItem(item.id)">
                   <i class="fas fa-pen"></i>
